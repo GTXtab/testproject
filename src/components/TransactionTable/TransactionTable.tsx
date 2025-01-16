@@ -1,47 +1,265 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TransactionTable.module.scss"; // Імпорт стилів
 import Pagination from "../Pagination/Pagination";
+import { getTransactions } from "../../services/fetch";
 
 const transactions = [
-  { name: "NL KPN 1 Month", method: "XRP", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "AVAX", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
-  { name: "NL KPN 1 Month", method: "AVAX", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
-  { name: "NL KPN 1 Month", method: "ETH", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "PEPE", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
-  { name: "NL KPN 1 Month", method: "XRP", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "AVAX", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
-  { name: "NL KPN 1 Month", method: "AVAX", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
-  { name: "NL KPN 1 Month", method: "ETH", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "PEPE", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
-  { name: "NL KPN 1 Month", method: "XRP", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "AVAX", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
-  { name: "NL KPN 1 Month", method: "AVAX", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
-  { name: "NL KPN 1 Month", method: "ETH", date: "16/12/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "PEPE", date: "14/11/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "14/10/2023", amount: "$ 89,00", status: "Active" },
-  { name: "NL KPN 1 Month", method: "BTC", date: "15/09/2023", amount: "$ 89,00", status: "Cancelled" },
+  {
+    name: "NL KPN 1 Month",
+    method: "XRP",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "AVAX",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "AVAX",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "ETH",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "PEPE",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "XRP",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "AVAX",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "AVAX",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "ETH",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "PEPE",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "XRP",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "AVAX",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "AVAX",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "ETH",
+    date: "16/12/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "PEPE",
+    date: "14/11/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "14/10/2023",
+    amount: "$ 89,00",
+    status: "Active",
+  },
+  {
+    name: "NL KPN 1 Month",
+    method: "BTC",
+    date: "15/09/2023",
+    amount: "$ 89,00",
+    status: "Cancelled",
+  },
 ];
 
 const TransactionsTable = () => {
+  const [transactions, setTransactions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const transactionsPerPage = 4; // Відображати 4 транзакції на сторінку
 
@@ -53,12 +271,18 @@ const TransactionsTable = () => {
     indexOfLastTransaction
   );
 
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      const response = await getTransactions();
+      setTransactions(response);
+    };
+    fetchTransactions();
+  }, []);
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Latest Transactions</h2>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -77,7 +301,7 @@ const TransactionsTable = () => {
             >
               <td>{transaction.name}</td>
               <td>{transaction.method}</td>
-              <td>{transaction.date}</td>
+              <td>{transaction.createdOn}</td>
               <td>{transaction.amount}</td>
               <td>
                 <span
