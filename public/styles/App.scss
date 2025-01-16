@@ -1,0 +1,42 @@
+@use "./vars.scss" as *;
+@use "./mixins.scss" as *;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+ul,
+ol {
+    margin: 0;
+  list-style: none;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+body {
+  padding-inline: 24px;
+  font-family: Inter;
+  background-color: $c-black;
+  box-sizing: border-box;
+  margin: 0;
+}

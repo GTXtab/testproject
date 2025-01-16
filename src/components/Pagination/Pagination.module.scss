@@ -1,0 +1,87 @@
+@use "/public/styles/vars.scss" as *;
+
+.pagPC {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 20px;
+}
+
+.pagButton {
+  color: #fcff72;
+
+  margin: 0 5px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagButton:hover {
+  background: transparent;
+}
+
+.pagButtons {
+  display: flex;
+  gap: 5px;
+}
+
+.pagItem {
+  padding: 10px;
+  width: 40px;
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.active {
+  color: #ffffff;
+  border: 1px solid #e2e4694d;
+  border-radius: 50%;
+  background: transparent;
+  width: 40px;
+  padding: 10px;
+}
+
+.disabled {
+  cursor: default;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .pagForPhone {
+    width: 100%;
+    margin: 20px auto 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pagButton {
+    background: transparent;
+    border: none;
+    color: $c-yellow;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:disabled {
+      background: transparent;
+      color: #7e808a;
+    }
+  }
+  .pagPC {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .pagForPhone {
+    display: none;
+  }
+
+  .pagButton:disabled {
+    background: transparent;
+    color: #7e808a;
+  }
+}

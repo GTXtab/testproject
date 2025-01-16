@@ -1,0 +1,110 @@
+@use "/public/styles/vars" as *;
+
+/* Загальний контейнер */
+.container {
+  background: #181818;
+  max-width: 776px;
+  margin: 0 auto;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Заголовок */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  margin: 0;
+}
+
+/* Таблиця */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th {
+  padding: 10px 15px;
+  text-align: left;
+  background: #242424;
+  color: #bbb;
+}
+
+.table td {
+  padding: 10px 15px;
+  word-wrap: break-word;
+}
+
+/* Ряди таблиці */
+.rowEven {
+  background: #242424;
+}
+
+.rowOdd {
+  background: #1e1e1e;
+}
+
+/* Статуси */
+.statusActive {
+  color: #4caf50;
+  background: #213d21;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.statusCancelled {
+  color: #888;
+  background: #2c2c2c;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Мобільний режим */
+@media (max-width: 768px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .table th,
+  .table td {
+    width: 140px;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .paginationForPhone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .paginationButton {
+    font-size: 16px;
+  }
+
+  .pageInfo {
+    display: none;
+  }
+
+  .mobilePageInfo {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+  }
+}

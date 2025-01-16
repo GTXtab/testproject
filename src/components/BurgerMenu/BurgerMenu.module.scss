@@ -1,0 +1,137 @@
+@import "../../../public/styles/_vars.scss";
+
+.BurgerMenu {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border: 1px solid $c-greybg;
+    padding: 8px;
+    border-radius: 5px;
+  }
+}
+
+.navBarItem {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  color: #babac1;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.navBarItem:nth-child(5) {
+    margin-top: 520px;
+}
+
+.navBarItemBlock {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  margin: 0;
+  border: 1px solid #363639;
+  border-radius: 10px;
+  background-color: #202023;
+}
+.navBarItemTitle {
+  display: block;
+  align-self: start;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #babac1;
+}
+
+.navBarItemButton {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid $c-yellow;
+  color: black;
+  background-color: $c-yellow;
+  text-decoration: none;
+  border-radius: 62px;
+}
+
+.overlay {
+  position: fixed;
+  padding: 12px;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  text-align: center;
+  background: #141417;
+  border: #202023;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+
+  &__logo {
+    display: block;
+    width: 40px;
+    height: auto;
+  }
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 48px;
+  }
+
+  &__close {
+    cursor: pointer;
+    max-width: 48px;
+    max-height: 48px;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__close img {
+    padding: 16px;
+    max-width: 48px;
+    max-height: 48px;
+  }
+}
+
+.nav-bar,
+.navBar {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  height: auto;
+  padding: 24px 0 16px;
+  gap: 32px;
+
+  &__link {
+    max-width: 110px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 11px;
+    font-size: 12px;
+  }
+
+  &-img {
+    padding: 16px;
+    max-width: 48px;
+    max-height: 48px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,56 @@
+@use "/public/styles/vars.scss" as *;
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid $c-greybg;
+}
+
+.container {
+  display: flex;
+  gap: 16px;
+}
+
+.balance {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $c-greybg;
+  border-radius: 5px;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 8px;
+  width: 142px;
+  height: 32px;
+
+  .title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    font-weight: 500;
+    color: #7e808a;
+  }
+
+  .amount {
+    font-family: Inter;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+  }
+
+  button {
+    cursor: pointer;
+    padding: 0;
+    display: block;
+    background-color: transparent;
+    border: 0;
+  }
+}
